@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html class="light" lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Executive Portal | LGE Europe TV P&L Dashboard</title>
+    <script src="portal-topbar.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#051c2c",
+                        "on-primary": "#ffffff",
+                        "secondary": "#a50034",
+                        "surface": "#f6faff",
+                        "surface-variant": "#ebf5ff",
+                        "outline": "#73777d",
+                        "outline-variant": "#c3c7cc",
+                        "error": "#e11d48",
+                        "background": "#ffffff",
+                        "primary-hover": "#860027",
+                        "teal-accent": "#00a3a3",
+                        "crimson-accent": "#e11d48"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["\"Source Serif 4\"", "serif"],
+                        "body": ["Inter", "Noto Sans KR", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', 'Noto Sans KR', sans-serif; background-color: #f6faff; color: #051c2c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Source Serif 4', serif; }
+        .sidebar-item.active { background-color: rgba(255, 255, 255, 0.1); border-right: 4px solid #ffffff; }
+        .sub-link.active { color: #ffffff !important; font-weight: 600; }
+        .country-node.active > button { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Sidebar Navigation -->
+    <aside class="w-72 bg-primary text-white fixed h-screen flex flex-col z-50 shadow-lg">
+        <div class="p-8 border-b border-white/10 flex-shrink-0">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-white/80">insights</span>
+                <h1 class="text-xl font-bold tracking-tight">TV P&L Portal</h1>
+            </div>
+            <p class="text-[10px] text-white/50 uppercase tracking-[0.2em] font-medium">LGE Europe TV Portal</p>
+        </div>
+        
+        <nav class="flex-1 py-6 space-y-1 overflow-y-auto" id="sidebar-nav">
+            <div class="px-4 pb-4">
+                <button class="sidebar-item active w-full flex items-center gap-4 px-6 py-3.5 rounded transition-all hover:bg-white/5 text-left" id="btn_summary" onclick="showHome()">
+                    <span class="material-symbols-outlined text-sm opacity-50">home</span>
+                    <span class="font-medium text-sm">대시보드 포털 홈</span>
+                </button>
+            </div>
+            
+            <div class="px-8 py-2 text-[10px] font-bold text-white/40 uppercase tracking-widest">Regional Dashboards</div>
+
+        <!-- Austria (오스트리아) -->
+        <div class="country-node px-4" id="node-austria">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('austria')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">AG</span>
+                    <span>Austria (오스트리아)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-austria">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-austria" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Benelux (베네룩스) -->
+        <div class="country-node px-4" id="node-benelux">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('benelux')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">BN</span>
+                    <span>Benelux (베네룩스)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-benelux">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-benelux" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Czech (체코) -->
+        <div class="country-node px-4" id="node-czech">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('czech')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">CK</span>
+                    <span>Czech (체코)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-czech">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-czech" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Switzerland (스위스) -->
+        <div class="country-node px-4" id="node-swiss">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('swiss')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">Swiss</span>
+                    <span>Switzerland (스위스)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-swiss">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-swiss" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Spain (스페인) -->
+        <div class="country-node px-4" id="node-spain">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('spain')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">ES</span>
+                    <span>Spain (스페인)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-spain">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-spain" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- France (프랑스) -->
+        <div class="country-node px-4" id="node-france">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('france')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">FS</span>
+                    <span>France (프랑스)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-france">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-france" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Greece (그리스) -->
+        <div class="country-node px-4" id="node-greece">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('greece')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">HS</span>
+                    <span>Greece (그리스)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-greece">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-greece" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Italy (이탈리아) -->
+        <div class="country-node px-4" id="node-italy">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('italy')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">IS</span>
+                    <span>Italy (이탈리아)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-italy">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-italy" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Baltics (발트) -->
+        <div class="country-node px-4" id="node-baltics">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('baltics')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">LA</span>
+                    <span>Baltics (발트)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-baltics">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-baltics" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Hungary (헝가리) -->
+        <div class="country-node px-4" id="node-hungary">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('hungary')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">MK</span>
+                    <span>Hungary (헝가리)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-hungary">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-hungary" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Poland (폴란드) -->
+        <div class="country-node px-4" id="node-poland">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('poland')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">PL</span>
+                    <span>Poland (폴란드)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-poland">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-poland" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Portugal (포르투갈) -->
+        <div class="country-node px-4" id="node-portugal">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('portugal')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">PT</span>
+                    <span>Portugal (포르투갈)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-portugal">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-portugal" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Romania (루마니아) -->
+        <div class="country-node px-4" id="node-romania">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('romania')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">RO</span>
+                    <span>Romania (루마니아)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-romania">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-romania" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- Sweden (스웨덴) -->
+        <div class="country-node px-4" id="node-sweden">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('sweden')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">SW</span>
+                    <span>Sweden (스웨덴)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-sweden">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-sweden" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        <!-- United Kingdom (영국) -->
+        <div class="country-node px-4" id="node-uk">
+            <button class="w-full flex items-center justify-between px-4 py-3 rounded text-left text-white/70 hover:text-white hover:bg-white/5 transition-all group" onclick="toggleSubmenu('uk')">
+                <span class="flex items-center gap-3 text-xs font-medium">
+                    <span class="text-[9px] font-mono font-bold bg-white/10 text-white/80 px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">UK</span>
+                    <span>United Kingdom (영국)</span>
+                </span>
+                <span class="material-symbols-outlined text-xs opacity-50 transition-transform" id="arrow-uk">expand_more</span>
+            </button>
+            <div class="sub-menu flex-col pl-9 mt-1 space-y-1 pb-2 border-l border-white/10 ml-6" id="sub-uk" style="display: none;">
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'current_month_pnl', this); return false;">Ⅰ. 당월 손익 실적</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'pl_structure', this); return false;">Ⅱ. 구조적 손익 추이</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'fundamental_structure', this); return false;">Ⅲ. Fundamental 손익</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'pnl_detail', this); return false;">Ⅳ. 수익성 상세 분석</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'blu_model', this); return false;">Ⅴ. 시리즈별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'model_series', this); return false;">Ⅵ. 모델별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'account', this); return false;">Ⅶ. Account별 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'account_detail', this); return false;">Ⅷ. Account별 상세 수익성</a>
+                <a href="#" class="sub-link block px-3 py-1.5 text-[11px] text-white/40 hover:text-white rounded hover:bg-white/5 transition-all" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'sales_deduction', this); return false;">Ⅸ. Sales Deduction 분석</a>
+            </div>
+        </div>
+    
+        </nav>
+        
+        <div class="p-8 border-t border-white/10 bg-black/10 flex flex-col gap-1 text-[10px] text-white/40 font-sans tracking-tight leading-relaxed flex-shrink-0">
+            <p class="font-bold text-white/50 text-[11px] mb-1">System Admin</p>
+            <p class="text-white/60">Harry Park</p>
+            <p><a href="mailto:harry.park@lge.com" class="hover:text-primary text-white/50 underline decoration-white/20 transition-all">harry.park@lge.com</a></p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="ml-72 flex-1 flex flex-col min-h-screen">
+        <!-- Top Bar Header -->
+        <header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-12 sticky top-0 z-40">
+            <div class="flex items-center gap-6">
+                <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Europe TV P&L Portal</span>
+                <div class="h-4 w-px bg-slate-200"></div>
+                <p class="text-sm font-semibold text-primary" id="page-indicator">대시보드 포털 홈</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-right">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Report Month</p>
+                    <p class="text-sm font-bold text-primary" id="report-month-indicator">2026.06</p>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <button class="items-center gap-2 text-xs font-bold border border-slate-200 rounded px-4 py-2 hover:bg-slate-50 transition-all cursor-pointer" id="btn-back-home" style="display: none;" onclick="showHome()">
+                    <span class="material-symbols-outlined text-xs">arrow_back</span> 포털 홈으로
+                </button>
+            </div>
+        </header>
+
+        <!-- View Container -->
+        <div class="flex-1 flex flex-col relative overflow-y-auto">
+            
+            <!-- Home Grid View -->
+            <div class="p-12 max-w-7xl mx-auto w-full flex-1" id="home-view-container">
+                <!-- Welcome Banner -->
+                <div class="bg-primary text-white p-8 rounded-lg shadow-md mb-12 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h2 class="text-3xl font-headline font-bold mb-3">유럽 TV 결산 손익 관리 포털</h2>
+                        <p class="text-xs text-white/70 leading-relaxed max-w-4xl">본 포털은 유럽 주요 지사 및 지점의 TV 사업 P&L 결산 실적(Standard & Fundamental)을 종합 모니터링하기 위한 통합 인덱스 포털입니다. 아래 각 지점별 카드 또는 좌측 사이드바 메뉴에서 특정 법인을 선택하시면 상세 손익 분석 데이터와 다개년 Waterfall Bridge 차트, 제품군별 수익성 매트릭스를 인터랙티브하게 조회하실 수 있습니다.</p>
+                    </div>
+                    <div class="absolute -right-24 -bottom-24 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
+                </div>
+
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="h-6 w-1 bg-secondary"></span>
+                    <h3 class="text-2xl font-headline font-bold text-primary">지점/법인별 YTD 손익 실적 요약</h3>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+                <!-- Austria (오스트리아) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-austria .sub-link:nth-child(1)')); toggleSubmenu('austria');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">AG</span>
+                            <span class="text-lg font-headline font-bold text-primary">Austria (오스트리아)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 53,020대 (전년비 ▲ 15.1%), Net Sales 32,028K$ (전년비 ▲ 8.1%)를 기록하였으며, 누적 영업이익률(COI%)은 7.3% (전년비 ▲ 0.1%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">53,020대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 15.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">32,028K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 8.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">7.3%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 0.1%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-austria .sub-link:nth-child(1)')); toggleSubmenu('austria');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Austria (오스트리아)', './법인별/01. AG/AG_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-austria .sub-link:nth-child(2)')); toggleSubmenu('austria');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Benelux (베네룩스) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-benelux .sub-link:nth-child(1)')); toggleSubmenu('benelux');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">BN</span>
+                            <span class="text-lg font-headline font-bold text-primary">Benelux (베네룩스)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 115,094대 (전년비 ▲ 1.5%), Net Sales 81,528K$ (전년비 ▲ 6.7%)를 기록하였으며, 누적 영업이익률(COI%)은 6.8% (전년비 ▲ 1.9%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">115,094대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 1.5%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">81,528K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 6.7%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">6.8%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 1.9%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-benelux .sub-link:nth-child(1)')); toggleSubmenu('benelux');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Benelux (베네룩스)', './법인별/02. BN/BN_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-benelux .sub-link:nth-child(2)')); toggleSubmenu('benelux');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Czech (체코) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-czech .sub-link:nth-child(1)')); toggleSubmenu('czech');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">CK</span>
+                            <span class="text-lg font-headline font-bold text-primary">Czech (체코)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 70,973대 (전년비 ▲ 3.5%), Net Sales 36,700K$ (전년비 ▲ 9.1%)를 기록하였으며, 누적 영업이익률(COI%)은 8.8% (전년비 ▲ 4.2%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">70,973대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 3.5%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">36,700K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 9.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">8.8%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 4.2%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-czech .sub-link:nth-child(1)')); toggleSubmenu('czech');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Czech (체코)', './법인별/03. CK/CK_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-czech .sub-link:nth-child(2)')); toggleSubmenu('czech');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Switzerland (스위스) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-swiss .sub-link:nth-child(1)')); toggleSubmenu('swiss');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">Swiss</span>
+                            <span class="text-lg font-headline font-bold text-primary">Switzerland (스위스)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 33,332대 (전년비 ▲ 9.3%), Net Sales 28,584K$ (전년비 ▲ 5.1%)를 기록하였으며, 누적 영업이익률(COI%)은 14.5% (전년비 ▲ 1.0%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">33,332대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 9.3%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">28,584K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 5.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">14.5%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 1.0%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-swiss .sub-link:nth-child(1)')); toggleSubmenu('swiss');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Switzerland (스위스)', './법인별/05. Swiss/Swiss_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-swiss .sub-link:nth-child(2)')); toggleSubmenu('swiss');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Spain (스페인) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-spain .sub-link:nth-child(1)')); toggleSubmenu('spain');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">ES</span>
+                            <span class="text-lg font-headline font-bold text-primary">Spain (스페인)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 363,136대 (전년비 ▲ 4.9%), Net Sales 152,673K$ (전년비 ▲ 4.6%)를 기록하였으며, 누적 영업이익률(COI%)은 5.3% (전년비 ▲ 1.3%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">363,136대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 4.9%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">152,673K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 4.6%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">5.3%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 1.3%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-spain .sub-link:nth-child(1)')); toggleSubmenu('spain');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Spain (스페인)', './법인별/06. ES/ES_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-spain .sub-link:nth-child(2)')); toggleSubmenu('spain');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- France (프랑스) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-crimson-accent cursor-pointer" onclick="showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-france .sub-link:nth-child(1)')); toggleSubmenu('france');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">FS</span>
+                            <span class="text-lg font-headline font-bold text-primary">France (프랑스)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-red-50 text-red-700 border-red-200">✗ Critical</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 153,214대 (전년비 ▼ 11.2%), Net Sales 88,405K$ (전년비 ▼ 5.0%)를 기록하였으며, 누적 영업이익률(COI%)은 -0.4% (전년비 ▲ 3.7%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">153,214대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 11.2%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">88,405K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 5.0%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">-0.4%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.7%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-france .sub-link:nth-child(1)')); toggleSubmenu('france');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('France (프랑스)', './법인별/07. FS/FS_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-france .sub-link:nth-child(2)')); toggleSubmenu('france');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Greece (그리스) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-greece .sub-link:nth-child(1)')); toggleSubmenu('greece');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">HS</span>
+                            <span class="text-lg font-headline font-bold text-primary">Greece (그리스)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 51,220대 (전년비 ▲ 11.1%), Net Sales 20,919K$ (전년비 ▲ 10.5%)를 기록하였으며, 누적 영업이익률(COI%)은 5.4% (전년비 ▲ 9.0%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">51,220대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 11.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">20,919K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 10.5%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">5.4%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 9.0%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-greece .sub-link:nth-child(1)')); toggleSubmenu('greece');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-greece .sub-link:nth-child(2)')); toggleSubmenu('greece');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Italy (이탈리아) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-italy .sub-link:nth-child(1)')); toggleSubmenu('italy');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">IS</span>
+                            <span class="text-lg font-headline font-bold text-primary">Italy (이탈리아)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 211,566대 (전년비 ▼ 5.3%), Net Sales 96,930K$ (전년비 ▲ 1.1%)를 기록하였으며, 누적 영업이익률(COI%)은 6.0% (전년비 ▲ 3.7%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">211,566대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 5.3%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">96,930K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 1.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">6.0%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.7%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-italy .sub-link:nth-child(1)')); toggleSubmenu('italy');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Italy (이탈리아)', './법인별/09. IS/IS_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-italy .sub-link:nth-child(2)')); toggleSubmenu('italy');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Baltics (발트) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-baltics .sub-link:nth-child(1)')); toggleSubmenu('baltics');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">LA</span>
+                            <span class="text-lg font-headline font-bold text-primary">Baltics (발트)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 49,270대 (전년비 ▲ 12.7%), Net Sales 29,070K$ (전년비 ▲ 42.3%)를 기록하였으며, 누적 영업이익률(COI%)은 15.2% (전년비 ▲ 5.3%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">49,270대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 12.7%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">29,070K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 42.3%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">15.2%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 5.3%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-baltics .sub-link:nth-child(1)')); toggleSubmenu('baltics');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Baltics (발트)', './법인별/10. LA/LA_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-baltics .sub-link:nth-child(2)')); toggleSubmenu('baltics');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Hungary (헝가리) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-hungary .sub-link:nth-child(1)')); toggleSubmenu('hungary');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">MK</span>
+                            <span class="text-lg font-headline font-bold text-primary">Hungary (헝가리)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 215,657대 (전년비 ▼ 1.6%), Net Sales 80,013K$ (전년비 ▲ 2.3%)를 기록하였으며, 누적 영업이익률(COI%)은 7.2% (전년비 ▲ 5.6%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">215,657대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 1.6%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">80,013K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 2.3%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">7.2%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 5.6%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-hungary .sub-link:nth-child(1)')); toggleSubmenu('hungary');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Hungary (헝가리)', './법인별/11. MK/MK_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-hungary .sub-link:nth-child(2)')); toggleSubmenu('hungary');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Poland (폴란드) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-poland .sub-link:nth-child(1)')); toggleSubmenu('poland');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">PL</span>
+                            <span class="text-lg font-headline font-bold text-primary">Poland (폴란드)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 73,532대 (전년비 ▼ 13.5%), Net Sales 47,878K$ (전년비 ▼ 5.5%)를 기록하였으며, 누적 영업이익률(COI%)은 6.3% (전년비 ▲ 3.3%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">73,532대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 13.5%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">47,878K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 5.5%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">6.3%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.3%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-poland .sub-link:nth-child(1)')); toggleSubmenu('poland');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Poland (폴란드)', './법인별/12. PL/PL_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-poland .sub-link:nth-child(2)')); toggleSubmenu('poland');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Portugal (포르투갈) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-crimson-accent cursor-pointer" onclick="showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-portugal .sub-link:nth-child(1)')); toggleSubmenu('portugal');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">PT</span>
+                            <span class="text-lg font-headline font-bold text-primary">Portugal (포르투갈)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-red-50 text-red-700 border-red-200">✗ Critical</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 120,472대 (전년비 ▲ 13.1%), Net Sales 38,740K$ (전년비 ▲ 2.6%)를 기록하였으며, 누적 영업이익률(COI%)은 -2.7% (전년비 ▲ 5.5%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">120,472대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 13.1%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">38,740K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 2.6%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">-2.7%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 5.5%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-portugal .sub-link:nth-child(1)')); toggleSubmenu('portugal');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Portugal (포르투갈)', './법인별/13. PT/PT_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-portugal .sub-link:nth-child(2)')); toggleSubmenu('portugal');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Romania (루마니아) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-crimson-accent cursor-pointer" onclick="showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-romania .sub-link:nth-child(1)')); toggleSubmenu('romania');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">RO</span>
+                            <span class="text-lg font-headline font-bold text-primary">Romania (루마니아)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-red-50 text-red-700 border-red-200">✗ Critical</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 53,849대 (전년비 ▼ 43.3%), Net Sales 17,908K$ (전년비 ▼ 48.4%)를 기록하였으며, 누적 영업이익률(COI%)은 -5.4% (전년비 ▼ 14.2%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">53,849대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 43.3%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">17,908K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 48.4%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">-5.4%</span>
+                            <span class="text-[9px] text-crimson-accent font-bold">▼ 14.2%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-romania .sub-link:nth-child(1)')); toggleSubmenu('romania');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Romania (루마니아)', './법인별/14. RO/RO_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-romania .sub-link:nth-child(2)')); toggleSubmenu('romania');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- Sweden (스웨덴) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-sweden .sub-link:nth-child(1)')); toggleSubmenu('sweden');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">SW</span>
+                            <span class="text-lg font-headline font-bold text-primary">Sweden (스웨덴)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 147,632대 (전년비 ▲ 13.3%), Net Sales 82,477K$ (전년비 ▲ 17.0%)를 기록하였으며, 누적 영업이익률(COI%)은 7.8% (전년비 ▲ 6.0%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">147,632대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 13.3%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">82,477K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 17.0%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">7.8%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 6.0%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-sweden .sub-link:nth-child(1)')); toggleSubmenu('sweden');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('Sweden (스웨덴)', './법인별/15. SW/SW_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-sweden .sub-link:nth-child(2)')); toggleSubmenu('sweden');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                <!-- United Kingdom (영국) -->
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-uk .sub-link:nth-child(1)')); toggleSubmenu('uk');">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">UK</span>
+                            <span class="text-lg font-headline font-bold text-primary">United Kingdom (영국)</span>
+                        </div>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
+                        2026년 06월 YTD 누적 기준 판매량 514,057대 (전년비 ▼ 13.4%), Net Sales 246,235K$ (전년비 ▼ 5.0%)를 기록하였으며, 누적 영업이익률(COI%)은 10.8% (전년비 ▲ 11.1%p)를 달성하였습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
+                            <span class="text-sm font-bold text-primary my-1">514,057대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 13.4%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
+                            <span class="text-sm font-bold text-primary my-1">246,235K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 5.0%</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">10.8%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 11.1%p</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-uk .sub-link:nth-child(1)')); toggleSubmenu('uk');">당월 손익</button>
+                        <button class="flex-1 bg-secondary hover:bg-primary-hover text-white text-xs font-semibold py-2.5 rounded transition-all flex items-center justify-center gap-2" onclick="event.stopPropagation(); showReport('United Kingdom (영국)', './법인별/16. UK/UK_TV_Profitability_Report.html', 'pl_structure', document.querySelector('#node-uk .sub-link:nth-child(2)')); toggleSubmenu('uk');">수익성 상세</button>
+                    </div>
+                </div>
+    
+                </div>
+            </div>
+
+            <!-- Report View Iframe -->
+            <div class="w-full flex-1" id="report-view-container" style="display: none; height: calc(100vh - 80px);">
+                <iframe id="report-iframe" class="w-full h-full border-none" src=""></iframe>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Navigation Script -->
+    <script>
+        let currentPath = '';
+        let currentIframeBaseUrl = '';
+        let justShownReport = false;
+
+        function showHome() {
+            const home = document.getElementById('home-view-container');
+            const report = document.getElementById('report-view-container');
+            const btnBack = document.getElementById('btn-back-home');
+
+            home.classList.remove('hidden');
+            home.style.display = 'block';
+            
+            report.classList.add('hidden');
+            report.style.display = 'none';
+
+            btnBack.classList.add('hidden');
+            btnBack.style.display = 'none';
+
+            document.getElementById('page-indicator').innerText = '대시보드 포털 홈';
+            
+            // Sidebar reset
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            document.getElementById('btn_summary').classList.add('active');
+            
+            document.querySelectorAll('.country-node').forEach(node => node.classList.remove('active'));
+            document.querySelectorAll('.sub-menu').forEach(menu => {
+                menu.classList.add('hidden');
+                menu.style.display = 'none';
+            });
+            document.querySelectorAll('.sub-link').forEach(link => link.classList.remove('active'));
+            
+            // Reset all arrow indicators to 0deg rotation
+            document.querySelectorAll('.country-node span[id^="arrow-"]').forEach(arrow => {
+                arrow.style.transform = 'rotate(0deg)';
+            });
+            
+            currentPath = '';
+            currentIframeBaseUrl = '';
+        }
+
+        function toggleSubmenu(countryId) {
+            if (justShownReport) return;
+            document.querySelectorAll('.sub-menu').forEach(menu => {
+                if (menu.id === 'sub-' + countryId) {
+                    const isDisplayed = menu.style.display === 'flex' || (!menu.classList.contains('hidden') && getComputedStyle(menu).display !== 'none');
+                    if (isDisplayed) {
+                        menu.classList.add('hidden');
+                        menu.style.display = 'none';
+                        document.getElementById('arrow-' + countryId).style.transform = 'rotate(0deg)';
+                    } else {
+                        menu.classList.remove('hidden');
+                        menu.style.display = 'flex';
+                        document.getElementById('arrow-' + countryId).style.transform = 'rotate(180deg)';
+                    }
+                } else {
+                    menu.classList.add('hidden');
+                    menu.style.display = 'none';
+                    const otherId = menu.id.replace('sub-', '');
+                    const otherArrow = document.getElementById('arrow-' + otherId);
+                    if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+
+        function showReport(name, path, tabName, element) {
+            justShownReport = true;
+            setTimeout(() => { justShownReport = false; }, 0);
+
+            const home = document.getElementById('home-view-container');
+            const report = document.getElementById('report-view-container');
+            const btnBack = document.getElementById('btn-back-home');
+
+            home.classList.add('hidden');
+            home.style.display = 'none';
+
+            report.classList.remove('hidden');
+            report.style.display = 'block';
+
+            btnBack.classList.remove('hidden');
+            btnBack.style.display = 'flex';
+
+            document.getElementById('page-indicator').innerText = name + ' TV 리포트';
+            
+            const iframe = document.getElementById('report-iframe');
+            const tabHash = '#route_' + tabName;
+            
+            if (currentPath !== path) {
+                currentPath = path;
+                const separator = path.includes('?') ? '&' : '?';
+                const cacheBuster = 'cb=' + Date.now();
+                currentIframeBaseUrl = path + separator + cacheBuster;
+                iframe.src = currentIframeBaseUrl + tabHash;
+            } else {
+                try {
+                    if (iframe.contentWindow) {
+                        iframe.contentWindow.location.hash = tabHash;
+                    } else {
+                        iframe.src = currentIframeBaseUrl + tabHash;
+                    }
+                } catch(e) {
+                    iframe.src = currentIframeBaseUrl + tabHash;
+                }
+            }
+            
+            // Sidebar active highlights
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.country-node').forEach(node => node.classList.remove('active'));
+            document.querySelectorAll('.sub-link').forEach(link => link.classList.remove('active'));
+            
+            if (element) {
+                const parentNode = element.closest('.country-node');
+                if (parentNode) {
+                    parentNode.classList.add('active');
+                    
+                    // Collapse all other submenus first
+                    document.querySelectorAll('.sub-menu').forEach(menu => {
+                        if (menu !== parentNode.querySelector('.sub-menu')) {
+                            menu.style.display = 'none';
+                            const otherId = menu.id.replace('sub-', '');
+                            const arrow = document.getElementById('arrow-' + otherId);
+                            if (arrow) arrow.style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    const menu = parentNode.querySelector('.sub-menu');
+                    if (menu) {
+                        menu.classList.remove('hidden');
+                        menu.style.display = 'flex';
+                        const countryId = parentNode.id.replace('node-', '');
+                        const arrow = document.getElementById('arrow-' + countryId);
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                }
+                element.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

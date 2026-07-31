@@ -1,0 +1,19 @@
+# Confidential & Large Data Files
+법인별/
+*.xlsb
+*.xlsx
+*.csv
+
+# Temporary / Scratch directories & Python cache
+scratch/
+scratch_inspect/
+__pycache__/
+*.pyc
+
+# Logs & Firebase local artifacts
+.firebase/
+firebase-debug.log
+
+# System files
+.DS_Store
+Thumbs.db
