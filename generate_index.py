@@ -196,12 +196,12 @@ html_template += f"""
         <div class="flex-1 flex flex-col relative overflow-y-auto">
             
             <!-- Home Grid View -->
-            <div class="p-12 max-w-7xl mx-auto w-full flex-1" id="home-view-container">
+            <div class="px-6 py-8 max-w-[95%] mx-auto w-full flex-1" id="home-view-container">
                 <!-- Welcome Banner -->
                 <div class="bg-primary text-white p-8 rounded-lg shadow-md mb-12 relative overflow-hidden">
                     <div class="relative z-10">
                         <h2 class="text-3xl font-headline font-bold mb-3">유럽 TV 결산 손익 관리 포털</h2>
-                        <p class="text-xs text-white/70 leading-relaxed max-w-4xl">본 포털은 유럽 주요 지사 및 지점의 TV 사업 P&L 결산 실적(Standard & Fundamental)을 종합 모니터링하기 위한 통합 인덱스 포털입니다. 아래 각 지점별 카드 또는 좌측 사이드바 메뉴에서 특정 법인을 선택하시면 상세 손익 분석 데이터와 다개년 Waterfall Bridge 차트, 제품군별 수익성 매트릭스를 인터랙티브하게 조회하실 수 있습니다.</p>
+                        <p class="text-xs text-white/70 leading-relaxed max-w-6xl">본 포털은 유럽 주요 지사 및 지점의 TV 사업 P&L 결산 실적(Standard & Fundamental)을 종합 모니터링하기 위한 통합 인덱스 포털입니다. 아래 각 지점별 카드 또는 좌측 사이드바 메뉴에서 특정 법인을 선택하시면 상세 손익 분석 데이터와 다개년 Waterfall Bridge 차트, 제품군별 수익성 매트릭스를 인터랙티브하게 조회하실 수 있습니다.</p>
                     </div>
                     <div class="absolute -right-24 -bottom-24 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
                 </div>
