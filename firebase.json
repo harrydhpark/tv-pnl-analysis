@@ -6,6 +6,11 @@
       "**/.*",
       "**/node_modules/**",
       "**/*.py",
+      "**/*.xlsb",
+      "**/*.xlsm",
+      "**/*.xlsx",
+      "**/*.csv",
+      "**/*.txt",
       "scratch*/**",
       ".agents/**"
     ],
