@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="light" lang="ko">
 <head>
+    <script src="auth-guard.js"></script>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Executive Portal | LGE Europe TV P&L Dashboard</title>
-    <script src="portal-topbar.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -420,7 +420,7 @@
             <div class="flex items-center gap-6">
                 <div class="text-right">
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Report Month</p>
-                    <p class="text-sm font-bold text-primary" id="report-month-indicator">2026.06</p>
+                    <p class="text-sm font-bold text-primary" id="report-month-indicator">2026.07</p>
                 </div>
                 <div class="h-8 w-px bg-slate-200"></div>
                 <button class="items-center gap-2 text-xs font-bold border border-slate-200 rounded px-4 py-2 hover:bg-slate-50 transition-all cursor-pointer" id="btn-back-home" style="display: none;" onclick="showHome()">
@@ -461,24 +461,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 53,020대 (전년비 ▲ 15.1%), Net Sales 32,028K$ (전년비 ▲ 8.1%)를 기록하였으며, 누적 영업이익률(COI%)은 7.3% (전년비 ▲ 0.1%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 59,148대 (전년비 ▲ 16.0%), Net Sales 36,179K$ (전년비 ▲ 9.6%)를 기록하였으며, 누적 영업이익률(COI%)은 7.1% (전년비 ▲ 0.6%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">53,020대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 15.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">59,148대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 16.0%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">32,028K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 8.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">36,179K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 9.6%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">7.3%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 0.1%p</span>
+                            <span class="text-sm font-bold text-primary my-1">7.1%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 0.6%p</span>
                         </div>
                     </div>
 
@@ -498,24 +498,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 115,094대 (전년비 ▲ 1.5%), Net Sales 81,528K$ (전년비 ▲ 6.7%)를 기록하였으며, 누적 영업이익률(COI%)은 6.8% (전년비 ▲ 1.9%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 129,360대 (전년비 ▲ 1.7%), Net Sales 92,166K$ (전년비 ▲ 7.6%)를 기록하였으며, 누적 영업이익률(COI%)은 7.0% (전년비 ▲ 2.8%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">115,094대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 1.5%</span>
+                            <span class="text-sm font-bold text-primary my-1">129,360대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 1.7%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">81,528K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 6.7%</span>
+                            <span class="text-sm font-bold text-primary my-1">92,166K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 7.6%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">6.8%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 1.9%p</span>
+                            <span class="text-sm font-bold text-primary my-1">7.0%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 2.8%p</span>
                         </div>
                     </div>
 
@@ -535,24 +535,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 70,973대 (전년비 ▲ 3.5%), Net Sales 36,700K$ (전년비 ▲ 9.1%)를 기록하였으며, 누적 영업이익률(COI%)은 8.8% (전년비 ▲ 4.2%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 78,255대 (전년비 ▲ 0.7%), Net Sales 40,313K$ (전년비 ▲ 7.3%)를 기록하였으며, 누적 영업이익률(COI%)은 8.2% (전년비 ▲ 4.9%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">70,973대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 3.5%</span>
+                            <span class="text-sm font-bold text-primary my-1">78,255대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 0.7%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">36,700K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 9.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">40,313K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 7.3%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">8.8%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 4.2%p</span>
+                            <span class="text-sm font-bold text-primary my-1">8.2%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 4.9%p</span>
                         </div>
                     </div>
 
@@ -572,24 +572,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 33,332대 (전년비 ▲ 9.3%), Net Sales 28,584K$ (전년비 ▲ 5.1%)를 기록하였으며, 누적 영업이익률(COI%)은 14.5% (전년비 ▲ 1.0%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 37,556대 (전년비 ▲ 10.7%), Net Sales 32,416K$ (전년비 ▲ 6.9%)를 기록하였으며, 누적 영업이익률(COI%)은 14.1% (전년비 ▲ 2.2%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">33,332대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 9.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">37,556대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 10.7%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">28,584K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 5.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">32,416K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 6.9%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">14.5%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 1.0%p</span>
+                            <span class="text-sm font-bold text-primary my-1">14.1%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 2.2%p</span>
                         </div>
                     </div>
 
@@ -609,23 +609,23 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 363,136대 (전년비 ▲ 4.9%), Net Sales 152,673K$ (전년비 ▲ 4.6%)를 기록하였으며, 누적 영업이익률(COI%)은 5.3% (전년비 ▲ 1.3%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 420,257대 (전년비 ▲ 4.1%), Net Sales 178,859K$ (전년비 ▲ 6.2%)를 기록하였으며, 누적 영업이익률(COI%)은 5.6% (전년비 ▲ 1.3%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">363,136대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 4.9%</span>
+                            <span class="text-sm font-bold text-primary my-1">420,257대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 4.1%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">152,673K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 4.6%</span>
+                            <span class="text-sm font-bold text-primary my-1">178,859K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 6.2%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">5.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">5.6%</span>
                             <span class="text-[9px] text-teal-accent font-bold">▲ 1.3%p</span>
                         </div>
                     </div>
@@ -646,24 +646,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-red-50 text-red-700 border-red-200">✗ Critical</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 153,214대 (전년비 ▼ 11.2%), Net Sales 88,405K$ (전년비 ▼ 5.0%)를 기록하였으며, 누적 영업이익률(COI%)은 -0.4% (전년비 ▲ 3.7%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 179,957대 (전년비 ▼ 10.1%), Net Sales 102,348K$ (전년비 ▼ 4.5%)를 기록하였으며, 누적 영업이익률(COI%)은 -0.4% (전년비 ▲ 4.2%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">153,214대</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 11.2%</span>
+                            <span class="text-sm font-bold text-primary my-1">179,957대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 10.1%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">88,405K$</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 5.0%</span>
+                            <span class="text-sm font-bold text-primary my-1">102,348K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 4.5%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
                             <span class="text-sm font-bold text-primary my-1">-0.4%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.7%p</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 4.2%p</span>
                         </div>
                     </div>
 
@@ -674,33 +674,33 @@
                 </div>
     
                 <!-- Greece (그리스) -->
-                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-teal-accent cursor-pointer" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-greece .sub-link:nth-child(1)')); toggleSubmenu('greece');">
+                <div class="bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg transition-all border-l-4 border-l-amber-500 cursor-pointer" onclick="showReport('Greece (그리스)', './법인별/08. HS/HS_TV_Profitability_Report.html', 'current_month_pnl', document.querySelector('#node-greece .sub-link:nth-child(1)')); toggleSubmenu('greece');">
                     <div class="flex justify-between items-center mb-4">
                         <div class="flex items-center gap-3">
                             <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200 uppercase tracking-wider">HS</span>
                             <span class="text-lg font-headline font-bold text-primary">Greece (그리스)</span>
                         </div>
-                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
+                        <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-amber-50 text-amber-700 border-amber-200">⚠ Warning</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 51,220대 (전년비 ▲ 11.1%), Net Sales 20,919K$ (전년비 ▲ 10.5%)를 기록하였으며, 누적 영업이익률(COI%)은 5.4% (전년비 ▲ 9.0%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 57,210대 (전년비 ▲ 13.3%), Net Sales 23,297K$ (전년비 ▲ 12.1%)를 기록하였으며, 누적 영업이익률(COI%)은 4.3% (전년비 ▲ 9.2%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">51,220대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 11.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">57,210대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 13.3%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">20,919K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 10.5%</span>
+                            <span class="text-sm font-bold text-primary my-1">23,297K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 12.1%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">5.4%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 9.0%p</span>
+                            <span class="text-sm font-bold text-primary my-1">4.3%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 9.2%p</span>
                         </div>
                     </div>
 
@@ -720,24 +720,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 211,566대 (전년비 ▼ 5.3%), Net Sales 96,930K$ (전년비 ▲ 1.1%)를 기록하였으며, 누적 영업이익률(COI%)은 6.0% (전년비 ▲ 3.7%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 233,322대 (전년비 ▼ 5.8%), Net Sales 109,149K$ (전년비 ▲ 5.3%)를 기록하였으며, 누적 영업이익률(COI%)은 6.1% (전년비 ▲ 8.8%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">211,566대</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 5.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">233,322대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 5.8%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">96,930K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 1.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">109,149K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 5.3%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">6.0%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.7%p</span>
+                            <span class="text-sm font-bold text-primary my-1">6.1%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 8.8%p</span>
                         </div>
                     </div>
 
@@ -757,24 +757,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 49,270대 (전년비 ▲ 12.7%), Net Sales 29,070K$ (전년비 ▲ 42.3%)를 기록하였으며, 누적 영업이익률(COI%)은 15.2% (전년비 ▲ 5.3%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 59,134대 (전년비 ▲ 17.9%), Net Sales 32,537K$ (전년비 ▲ 38.4%)를 기록하였으며, 누적 영업이익률(COI%)은 15.0% (전년비 ▲ 5.0%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">49,270대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 12.7%</span>
+                            <span class="text-sm font-bold text-primary my-1">59,134대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 17.9%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">29,070K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 42.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">32,537K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 38.4%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">15.2%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 5.3%p</span>
+                            <span class="text-sm font-bold text-primary my-1">15.0%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 5.0%p</span>
                         </div>
                     </div>
 
@@ -794,23 +794,23 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 215,657대 (전년비 ▼ 1.6%), Net Sales 80,013K$ (전년비 ▲ 2.3%)를 기록하였으며, 누적 영업이익률(COI%)은 7.2% (전년비 ▲ 5.6%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 236,914대 (전년비 ▼ 1.0%), Net Sales 88,569K$ (전년비 ▲ 2.2%)를 기록하였으며, 누적 영업이익률(COI%)은 6.6% (전년비 ▲ 5.6%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">215,657대</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 1.6%</span>
+                            <span class="text-sm font-bold text-primary my-1">236,914대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 1.0%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">80,013K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 2.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">88,569K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 2.2%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">7.2%</span>
+                            <span class="text-sm font-bold text-primary my-1">6.6%</span>
                             <span class="text-[9px] text-teal-accent font-bold">▲ 5.6%p</span>
                         </div>
                     </div>
@@ -831,24 +831,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 73,532대 (전년비 ▼ 13.5%), Net Sales 47,878K$ (전년비 ▼ 5.5%)를 기록하였으며, 누적 영업이익률(COI%)은 6.3% (전년비 ▲ 3.3%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 84,117대 (전년비 ▼ 11.1%), Net Sales 54,848K$ (전년비 ▼ 3.3%)를 기록하였으며, 누적 영업이익률(COI%)은 6.1% (전년비 ▲ 3.9%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">73,532대</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 13.5%</span>
+                            <span class="text-sm font-bold text-primary my-1">84,117대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 11.1%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">47,878K$</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 5.5%</span>
+                            <span class="text-sm font-bold text-primary my-1">54,848K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 3.3%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">6.3%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.3%p</span>
+                            <span class="text-sm font-bold text-primary my-1">6.1%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 3.9%p</span>
                         </div>
                     </div>
 
@@ -868,24 +868,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-red-50 text-red-700 border-red-200">✗ Critical</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 120,472대 (전년비 ▲ 13.1%), Net Sales 38,740K$ (전년비 ▲ 2.6%)를 기록하였으며, 누적 영업이익률(COI%)은 -2.7% (전년비 ▲ 5.5%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 131,404대 (전년비 ▲ 9.6%), Net Sales 43,715K$ (전년비 ▲ 14.5%)를 기록하였으며, 누적 영업이익률(COI%)은 -1.6% (전년비 ▲ 18.4%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">120,472대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 13.1%</span>
+                            <span class="text-sm font-bold text-primary my-1">131,404대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 9.6%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">38,740K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 2.6%</span>
+                            <span class="text-sm font-bold text-primary my-1">43,715K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 14.5%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">-2.7%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 5.5%p</span>
+                            <span class="text-sm font-bold text-primary my-1">-1.6%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 18.4%p</span>
                         </div>
                     </div>
 
@@ -905,24 +905,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-red-50 text-red-700 border-red-200">✗ Critical</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 53,849대 (전년비 ▼ 43.3%), Net Sales 17,908K$ (전년비 ▼ 48.4%)를 기록하였으며, 누적 영업이익률(COI%)은 -5.4% (전년비 ▼ 14.2%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 60,711대 (전년비 ▼ 41.2%), Net Sales 20,495K$ (전년비 ▼ 46.0%)를 기록하였으며, 누적 영업이익률(COI%)은 -5.6% (전년비 ▼ 14.1%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">53,849대</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 43.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">60,711대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 41.2%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">17,908K$</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 48.4%</span>
+                            <span class="text-sm font-bold text-primary my-1">20,495K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 46.0%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">-5.4%</span>
-                            <span class="text-[9px] text-crimson-accent font-bold">▼ 14.2%p</span>
+                            <span class="text-sm font-bold text-primary my-1">-5.6%</span>
+                            <span class="text-[9px] text-crimson-accent font-bold">▼ 14.1%p</span>
                         </div>
                     </div>
 
@@ -942,24 +942,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 147,632대 (전년비 ▲ 13.3%), Net Sales 82,477K$ (전년비 ▲ 17.0%)를 기록하였으며, 누적 영업이익률(COI%)은 7.8% (전년비 ▲ 6.0%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 176,672대 (전년비 ▲ 21.5%), Net Sales 99,774K$ (전년비 ▲ 24.2%)를 기록하였으며, 누적 영업이익률(COI%)은 8.4% (전년비 ▲ 6.4%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">147,632대</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 13.3%</span>
+                            <span class="text-sm font-bold text-primary my-1">176,672대</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 21.5%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">82,477K$</span>
-                            <span class="text-[9px] text-green-600 font-bold">▲ 17.0%</span>
+                            <span class="text-sm font-bold text-primary my-1">99,774K$</span>
+                            <span class="text-[9px] text-green-600 font-bold">▲ 24.2%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">7.8%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 6.0%p</span>
+                            <span class="text-sm font-bold text-primary my-1">8.4%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 6.4%p</span>
                         </div>
                     </div>
 
@@ -979,24 +979,24 @@
                         <span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 06월 YTD 누적 기준 판매량 514,057대 (전년비 ▼ 13.4%), Net Sales 246,235K$ (전년비 ▼ 5.0%)를 기록하였으며, 누적 영업이익률(COI%)은 10.8% (전년비 ▲ 11.1%p)를 달성하였습니다.
+                        2026년 07월 YTD 누적 기준 판매량 577,813대 (전년비 ▼ 11.0%), Net Sales 280,440K$ (전년비 ▼ 0.3%)를 기록하였으며, 누적 영업이익률(COI%)은 10.9% (전년비 ▲ 13.2%p)를 달성하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">514,057대</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 13.4%</span>
+                            <span class="text-sm font-bold text-primary my-1">577,813대</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 11.0%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">246,235K$</span>
-                            <span class="text-[9px] text-red-500 font-bold">▼ 5.0%</span>
+                            <span class="text-sm font-bold text-primary my-1">280,440K$</span>
+                            <span class="text-[9px] text-red-500 font-bold">▼ 0.3%</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
-                            <span class="text-sm font-bold text-primary my-1">10.8%</span>
-                            <span class="text-[9px] text-teal-accent font-bold">▲ 11.1%p</span>
+                            <span class="text-sm font-bold text-primary my-1">10.9%</span>
+                            <span class="text-[9px] text-teal-accent font-bold">▲ 13.2%p</span>
                         </div>
                     </div>
 

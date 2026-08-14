@@ -41,11 +41,13 @@ YTD 콤보 차트에 제공되는 데이터는 Standard 및 Fundamental 각각�
 - **세그먼트 분류 조건 (Lambda 형식)**:
   - OLED: `lambda s: s['OLED/UHD'] == 'OLED'`
   - QNED: `lambda s: s['QNED'] == 'QNED'`
-  - 일반 UHD: `lambda s: (s['OLED/UHD'] == 'UHD') & (s['QNED'] != 'QNED')`
+  - MRGB: `lambda s: s['QNED'] == 'MRGB'`
+  - 일반 UHD: `lambda s: (s['OLED/UHD'] == 'UHD') & (s['QNED'] != 'QNED') & (s['QNED'] != 'MRGB'`
   - FHD: `lambda s: s['OLED/UHD'] == 'FHD'`
   - 초대형: `lambda s: s[large_col] == '초대형'` (여기서 `large_col`은 17번째 열인 `초대형(OLED포함)`을 가리킵니다. 초대형 모델은 이 열에 `'초대형'` 문자열이, 일반 모델은 `'x'` 문자열이 입력되어 있습니다.)
   - **인코딩 선언 필수 규칙 (Encoding Declaration)**: Windows 한글 환경(CP949 기본값)에서 Python이 스크립트를 실행할 때 코드 내 한글 리터럴 `'초대형'` 비교 연산이 불일치하는 오류를 방지하기 위해, 실행 파이썬 스크립트 파일 최상단에 반드시 **`# -*- coding: utf-8 -*-`** 선언을 추가해야 합니다.
   * Pandas 연산 시 Boolean Series key mismatch 경고를 피하기 위해 반드시 슬라이스된 dataframe에 대해 직접 람다 조건 마스킹을 수행하여 결측치 전파 및 warnings를 사전 차단해야 합니다.
+
 - **YTD / MTD 분리 구조**:
   - 차트의 동적 토글을 위해 `s3_profit_ytd`와 `s3_profit_mtd`, 그리고 Others 점유 비중(`others_share = others_coi / total_coi`)을 별도 메타데이터(`s3_meta_ytd`, `s3_meta_mtd`)로 분리 산출하여 JSON payload에 전달합니다.
 - **명칭 통일**:

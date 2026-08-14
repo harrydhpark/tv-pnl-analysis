@@ -142,6 +142,13 @@ description: Generating interactive HTML profitability dashboards with w-72 side
 ### '기타 매출' 명칭 통일 규격 (Others 변경)
 - UI 전반에서 회계적 결산 조정과 콘텐츠 매출 등이 혼재된 `'Others'` 항목을 **`'기타 매출'`**로 일관되게 표기합니다 (도넛 차트 툴팁/텍스트, 매트릭스 X축/설명 말풍선/하단 주석, Tie-out Table 행 헤더 등 전 부문에 전역 적용).
 
+### MRGB 신규 제품군 추가 및 시각화 표준
+- **분류 및 필터링 정합성**: NERP raw data K열 및 P열의 QNED와 MRGB 구분에 따라 `MRGB`를 독립 세그먼트로 추출하며, `UHD` 제품군 연산 시 QNED 뿐만 아니라 MRGB 제품군도 제외되도록 예외 필터식(`& (s['QNED'] != 'MRGB')`)을 강제해야 합니다.
+- **MRGB 테마 색상**: 타사/기타 제품군과의 명확한 대조를 위해 **보라색/Indigo (`#4f46e5`, 반투명 버블 차트용: `rgba(79, 70, 229, 0.75)`)** 색상을 일관되게 부여합니다.
+- **수익성 매트릭스 X축 고정폭 재배치**: 카테고리가 6개(`OLED`, `QNED`, `MRGB`, `UHD`, `FHD`, `기타 매출`)로 증가함에 따라 X축 고정 분배 수식을 `const getX = (i) => 95 + (i * 82)`로 변경 적용하여 축 레이블과 막대 그래프 사이의 격리 마진(24px 이상)을 유지하고 화면 잘림을 차단합니다.
+- **월별 추이 필터 UI**: 차트 상단 제품군 필터 탭에 `MRGB` 버튼을 추가하여 단일 선택(Single-Selection) 방식 필터링 동작에 완벽히 호환되도록 구성합니다.
+
+
 ## 6. 시리즈별 / 모델별 / Account별 / Account별 상세 수익성 화면 및 UI 제어 규격
 
 - **조회 기준 Toggle Switch**:
@@ -166,3 +173,23 @@ description: Generating interactive HTML profitability dashboards with w-72 side
   - `switchTab(tabId)` 내에서 특정 탭의 전용 뷰 형태를 위해 공통 컴포넌트의 노출 여부를 동적으로 제어해야 합니다.
     - KPI 그리드(`#kpi-grid`): `pl_structure`, `pnl_detail`, `blu_model`, `model_series`, `account`, `account_detail` 탭에서 숨김(`display: none`), 그 외 탭에서 노출(`display: grid`).
     - 임플리케이션 슬롯(`#comment-slot`): `blu_model`, `model_series`, `account`, `account_detail` 탭에서 숨김(`display: none`), 그 외 탭에서 노출(`display: block`).
+
+---
+
+## 7. 업데이트 메타데이터 동적 동기화 규칙 (Updated Date & Report Month)
+
+보고서 빌드 시 하드코딩된 메타데이터로 인해 구버전 정보가 렌더링되는 오류를 차단하기 위해 다음 동적 갱신 규칙을 준수해야 합니다:
+
+- **수정일(Updated Date) 자동화**: 대시보드 리포트 생성 및 저장 시, 템플릿의 하드코딩된 작성 날짜를 실제 저장/수정 날짜(예: `2026년 08월 12일`)로 치환하여 `Updated Date` 영역을 갱신합니다.
+- **보고월(Report Month) 자동 동기화**: 대시보드 우측 상단 `Report Month` 영역의 하드코딩 초깃값(`2026.05` 등)을 실제 엑셀 원천 데이터의 최신 실적 결산월(예: `2026.07`)로 치환하여 `id="top-bar-month"` innerText 렌더링 전에 동시 매치시킵니다.
+
+---
+
+## 8. Price Tracker 대시보드 가격 비교 팝업 및 지표 표준 (Price History Popup)
+
+유통 가격 모니터링을 위한 가격 비교 대시보드(Price Tracker)에서 모델명 클릭 시 가격 변화 추이를 시각화할 때 준수해야 하는 기준은 다음과 같습니다:
+
+- **차트 클릭 및 X축 이벤트 연동**: 1:1 비교 막대 차트의 막대를 클릭할 때 뿐만 아니라 막대 하단의 X축 텍스트 라벨 영역을 클릭할 때도 꺾은선 팝업 모달이 노출되도록 Chart.js 옵션의 `onClick` 마우스 x좌표 비율 보정을 구현합니다.
+- **국가별 통화 기호 동적 포맷팅**: 꺾은선 차트의 Y축 및 데이터 레이블은 국가별 통화 매핑 정보(`countryCurrencies`, `currencySymbols`)와 `formatCurrency(val)` 함수를 호출하여 CHF, EUR, GBP, SEK 등 각 유통 국가의 공식 화폐 단위를 동적으로 렌더링해야 합니다.
+- **LG 포인트 툴팁 내 ATA 지표**: 가격 추이 꺾은선 차트에서 엘지(LG) 제품의 데이터 포인트에 마우스 호버 시 출력되는 툴팁 내에 엘지와 삼성의 가격비인 **`ATA: (엘지제품가격/삼성제품가격 * 100)`** 값을 연산하여 다음 줄에 출력합니다. 이때 ATA 비율은 단독 수치(예: `ATA: 113`)로 기재하며 퍼센트(`%`) 단위 기호는 표기하지 않습니다.
+
