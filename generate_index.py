@@ -13,7 +13,7 @@ countries_info = {
     'FS': {'name': 'France (프랑스)', 'code': 'FS', 'path': './법인별/07. FS/FS_TV_Profitability_Report.html', 'id': 'france'},
     'HS': {'name': 'Greece (그리스)', 'code': 'HS', 'path': './법인별/08. HS/HS_TV_Profitability_Report.html', 'id': 'greece'},
     'IS': {'name': 'Italy (이탈리아)', 'code': 'IS', 'path': './법인별/09. IS/IS_TV_Profitability_Report.html', 'id': 'italy'},
-    'LA': {'name': 'Baltics (발트)', 'code': 'LA', 'path': './법인별/10. LA/LA_TV_Profitability_Report.html', 'id': 'baltics'},
+    'LA': {'name': 'Latvia (라트비아)', 'code': 'LA', 'path': './법인별/10. LA/LA_TV_Profitability_Report.html', 'id': 'latvia'},
     'MK': {'name': 'Hungary (헝가리)', 'code': 'MK', 'path': './법인별/11. MK/MK_TV_Profitability_Report.html', 'id': 'hungary'},
     'PL': {'name': 'Poland (폴란드)', 'code': 'PL', 'path': './법인별/12. PL/PL_TV_Profitability_Report.html', 'id': 'poland'},
     'PT': {'name': 'Portugal (포르투갈)', 'code': 'PT', 'path': './법인별/13. PT/PT_TV_Profitability_Report.html', 'id': 'portugal'},
@@ -50,10 +50,12 @@ for code, info in countries_info.items():
             'qty_yoy': kpi['qty_yoy'],
             'sales': kpi['sales'],
             'sales_yoy': kpi['sales_yoy'],
+            'mp': kpi.get('mp', 0.0),
+            'mp_yoy': kpi.get('mp_yoy', None),
             'coi': kpi['coi'],
             'coi_yoy': kpi['coi_yoy']
         }
-        print(f"Loaded: Qty={kpi['qty']:,.0f}, Sales=${kpi['sales']/1000:,.0f}K$, COI={kpi['coi']*100:.1f}%")
+        print(f"Loaded: Sales={kpi['sales']/1000000:.1f}M$, COI={kpi['coi']*100:.1f}%, MP={kpi.get('mp',0.0)*100:.1f}%")
     else:
         print(f"Error parsing json in {file_path}")
 
@@ -228,28 +230,19 @@ for code, info in countries_info.items():
     cdata = data_by_country[code]
     
     # Format values
-    qty_val = cdata['qty']
     sales_val = cdata['sales']
     coi_val = cdata['coi']
+    mp_val = cdata['mp']
     
-    # Format Yoy and Indicator
-    qty_yoy = cdata['qty_yoy']
+    # Format YoY and Indicator
     sales_yoy = cdata['sales_yoy']
     coi_yoy = cdata['coi_yoy']
+    mp_yoy = cdata['mp_yoy']
     
-    # Qty YoY formatting
-    if qty_yoy is not None:
-        sign_q = "▲" if qty_yoy >= 0 else "▼"
-        color_q = "text-green-600" if qty_yoy >= 0 else "text-red-500"
-        qty_yoy_str = f"{sign_q} {abs(qty_yoy)*100:.1f}%"
-    else:
-        color_q = "text-slate-400"
-        qty_yoy_str = "-"
-        
-    # Sales YoY formatting
+    # Sales YoY formatting (%)
     if sales_yoy is not None:
         sign_s = "▲" if sales_yoy >= 0 else "▼"
-        color_s = "text-green-600" if sales_yoy >= 0 else "text-red-500"
+        color_s = "text-teal-accent" if sales_yoy >= 0 else "text-crimson-accent"
         sales_yoy_str = f"{sign_s} {abs(sales_yoy)*100:.1f}%"
     else:
         color_s = "text-slate-400"
@@ -263,9 +256,22 @@ for code, info in countries_info.items():
     else:
         color_c = "text-slate-400"
         coi_yoy_str = "-"
+
+    # MP YoY formatting (percentage points)
+    if mp_yoy is not None:
+        sign_m = "▲" if mp_yoy >= 0 else "▼"
+        color_m = "text-teal-accent" if mp_yoy >= 0 else "text-crimson-accent"
+        mp_yoy_str = f"{sign_m} {abs(mp_yoy)*100:.1f}%p"
+    else:
+        color_m = "text-slate-400"
+        mp_yoy_str = "-"
         
-    # Status Badge
+    # Format calculated metrics
     coi_pct = coi_val * 100
+    mp_pct = mp_val * 100
+    sales_mil_str = f"{sales_val / 1000000:.1f}M$"
+    
+    # Status Badge
     if coi_pct >= 5.0:
         status_badge = '<span class="status-badge text-[10px] font-bold px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200">✓ Healthy</span>'
         border_color = 'border-l-teal-accent'
@@ -287,24 +293,24 @@ for code, info in countries_info.items():
                         {status_badge}
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed mb-6 h-12 overflow-hidden">
-                        2026년 {cdata['month']:02d}월 YTD 누적 기준 판매량 {qty_val:,.0f}대 (전년비 {qty_yoy_str}), Net Sales {sales_val/1000:,.0f}K$ (전년비 {sales_yoy_str})를 기록하였으며, 누적 영업이익률(COI%)은 {coi_pct:.1f}% (전년비 {coi_yoy_str})를 달성하였습니다.
+                        2026년 {cdata['month']:02d}월 YTD 누적 기준 Net Sales {sales_mil_str} (전년비 {sales_yoy_str}), 영업이익률(COI%)은 {coi_pct:.1f}% (전년비 {coi_yoy_str}), 한계이익률(MP%)은 {mp_pct:.1f}% (전년비 {mp_yoy_str})를 기록하였습니다.
                     </p>
                     
                     <div class="grid grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border border-slate-100 mb-6">
                         <div class="flex flex-col items-center justify-center text-center">
-                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 판매량</span>
-                            <span class="text-sm font-bold text-primary my-1">{qty_val:,.0f}대</span>
-                            <span class="text-[9px] {color_q} font-bold">{qty_yoy_str}</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 Net Sales</span>
-                            <span class="text-sm font-bold text-primary my-1">{sales_val/1000:,.0f}K$</span>
+                            <span class="text-sm font-bold text-primary my-1">{sales_mil_str}</span>
                             <span class="text-[9px] {color_s} font-bold">{sales_yoy_str}</span>
                         </div>
-                        <div class="flex flex-col items-center justify-center text-center">
+                        <div class="flex flex-col items-center justify-center text-center border-x border-slate-200">
                             <span class="text-[9px] text-slate-400 uppercase font-bold">누적 영업이익률</span>
                             <span class="text-sm font-bold text-primary my-1">{coi_pct:.1f}%</span>
                             <span class="text-[9px] {color_c} font-bold">{coi_yoy_str}</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="text-[9px] text-slate-400 uppercase font-bold">누적 한계이익률</span>
+                            <span class="text-sm font-bold text-primary my-1">{mp_pct:.1f}%</span>
+                            <span class="text-[9px] {color_m} font-bold">{mp_yoy_str}</span>
                         </div>
                     </div>
 
