@@ -40,7 +40,9 @@ for code, info in countries_info.items():
         data = json.loads(match.group(1))
         latest_year = data['LATEST_YEAR']
         latest_month = data['LATEST_MONTH']
-        latest_report_month_str = f"{latest_year}.{latest_month:02d}"
+        cur_month_str = f"{latest_year}.{latest_month:02d}"
+        if not latest_report_month_str or cur_month_str > latest_report_month_str:
+            latest_report_month_str = cur_month_str
         
         kpi = data['DATA']['standard']['kpi']['ytd']
         data_by_country[code] = {
